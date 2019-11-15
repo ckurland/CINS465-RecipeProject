@@ -32,8 +32,16 @@ def home(request):
             }
     return render(request, "home.html", context=context)
 
+@login_required(login_url='/login/')
 def addRecipe(request):
-    form_instance = forms.RecipeForm()
+    if request.method == "POST":
+        form_instance = forms.RecipeForm(request.POST, request.FILES)
+        if form_instance.is_valid():
+            new_reci = form_instance.save(request=request)
+            return redirect("/")
+    else:
+        form_instance = forms.RecipeForm()
+
     context = {
             "title":"Add",
             "opener":"Add Recipe",
