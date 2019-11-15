@@ -17,10 +17,10 @@ class Recipe(models.Model):
         ('Japa', 'Japanese'),
         ('Mexi', 'Mexican'),
         ('Thai', 'Thai'),
-        ('', ''),
+        ('Gree', 'Greek'),
         ('Othe', 'Other'),
     )
-    foodCategory = models.CharField(max_length=1, choices=foodCategories)#may have to change max_length from 1, look at models documentation
+    foodCategory = models.CharField(max_length=4, choices=foodCategories)#may have to change max_length from 1, look at models documentation
     recipeUrl = models.URLField(max_length=240,blank=True)
     recipeDirections =  models.CharField(max_length=240, blank=True)
 
@@ -45,7 +45,7 @@ class Review(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.author.username + " " + self.review
+        return self.author.username + ": " + self.review
 
 class Ingredient(models.Model):
     ingredient = models.CharField(max_length=60)

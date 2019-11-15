@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-#from . import models
+from . import models
 from . import forms
 
 
@@ -19,6 +19,7 @@ def index(request):
 
 
 def home(request):
+    value = models.Recipe.objects.all()
     context = {
             "title":"Recipes",
             "opener":"Recipes",
@@ -27,10 +28,20 @@ def home(request):
             "view":"/view/",
             "review":"/review/",
             "login":"/login/",
+            "recipeList":value,
             }
     return render(request, "home.html", context=context)
 
+@login_required(login_url='/login/')
 def addRecipe(request):
+    if request.method == "POST":
+        form_instance = forms.RecipeForm(request.POST, request.FILES)
+        if form_instance.is_valid():
+            new_reci = form_instance.save(request=request)
+            return redirect("/")
+    else:
+        form_instance = forms.RecipeForm()
+
     context = {
             "title":"Add",
             "opener":"Add Recipe",
@@ -38,6 +49,7 @@ def addRecipe(request):
             "view":"/view/",
             "review":"/review/",
             "login":"/login/",
+            "form":form_instance,
             }
     return render(request, "add.html", context=context)
 
