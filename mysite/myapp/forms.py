@@ -7,7 +7,7 @@ from . import models
 
 
 class RecipeForm(forms.Form):
-    recipeName = forms.CharField(label="Name",max_length=60)
+    recipeName = forms.CharField(label="Recipe Name",max_length=60)
     recipeDescription = forms.CharField(label="Description",max_length=500)
     foodImage = forms.ImageField(label="Food Image")
     foodCategory = forms.ChoiceField(label="Category",choices=models.Recipe.foodCategories)
