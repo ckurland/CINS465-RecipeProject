@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
-#from . import models
+from . import models
 from . import forms
 
 
@@ -19,6 +19,7 @@ def index(request):
 
 
 def home(request):
+    value = models.Recipe.objects.all()
     context = {
             "title":"Recipes",
             "opener":"Recipes",
@@ -27,6 +28,7 @@ def home(request):
             "view":"/view/",
             "review":"/review/",
             "login":"/login/",
+            "recipeList":value,
             }
     return render(request, "home.html", context=context)
 
