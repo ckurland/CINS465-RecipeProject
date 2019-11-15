@@ -9,16 +9,22 @@ class Recipe(models.Model):
         max_length=144,
         upload_to='uploads/%Y/%m/%d/')
     foodCategories = (
-        ('S', 'Small'),# an example, first item is value stored in database
-        ('', ''),      #             second item is what is shown in the form's field
+        ('Asia', 'Asian'),# an example, first item is value stored in database
+        ('Amer', 'American'),      #             second item is what is shown in the form's field
+        ('Chin', 'Chinese'),
+        ('Indi', 'Indian'),
+        ('Ital', 'Italian'),
+        ('Japa', 'Japanese'),
+        ('Mexi', 'Mexican'),
+        ('Thai', 'Thai'),
         ('', ''),
+        ('Othe', 'Other'),
     )
-    foodCategory = models.CharField(max_length=10, choices=foodCategories)#may have to change max_length to 1, look at models documentation
+    foodCategory = models.CharField(max_length=1, choices=foodCategories)#may have to change max_length from 1, look at models documentation
     recipeUrl = models.URLField(max_length=240,blank=True)
     recipeDirections =  models.CharField(max_length=240, blank=True)
 
-    # Maybe add a date created item
-    # created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.recipeName
@@ -36,8 +42,7 @@ class Review(models.Model):
     )
     rating = models.CharField(max_length=1, choices=ratingOptions)
 
-    # Maybe add a date created item
-    # created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.author.username + " " + self.review

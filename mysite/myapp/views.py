@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 #from . import models
-#from . import forms
+from . import forms
 
 
 def index(request):
@@ -14,4 +16,68 @@ def index(request):
             "initialStatement":" This is the beginnings of the greatest recipe website known to man",
             }
     return render(request, "index.html", context=context)
+
+
+def home(request):
+    context = {
+            "title":"Recipes",
+            "opener":"Recipes",
+            #"addRecipeUrl":"/add/",
+            "add":"/add/",
+            "view":"/view/",
+            "review":"/review/",
+            "login":"/login/",
+            }
+    return render(request, "home.html", context=context)
+
+def addRecipe(request):
+    context = {
+            "title":"Add",
+            "opener":"Add Recipe",
+            "add":"/add/",
+            "view":"/view/",
+            "review":"/review/",
+            "login":"/login/",
+            }
+    return render(request, "add.html", context=context)
+
+
+def viewRecipe(request):
+    context = {
+            "title":"Recipe",
+            "opener":"View Recipe",
+            "reviewRecipeUrl":"/review/",
+            "add":"/add/",
+            "view":"/view/",
+            "review":"/review/",
+            "login":"/login/",
+            }
+    return render(request, "viewRecipe.html", context=context)
+
+def reviewRecipe(request):
+    context = {
+            "title":"Review",
+            "opener":"Review Recipe",
+            "add":"/add/",
+            "view":"/view/",
+            "review":"/review/",
+            "login":"/login/",
+            }
+    return render(request, "review.html", context=context)
+
+def register(request):
+    if request.method == "POST":
+        form_instance = forms.RegistrationForm(request.POST)
+        if form_instance.is_valid():
+            form_instance.save()
+            return redirect("/login/")
+    else:
+        form_instance = forms.RegistrationForm()
+    context = {
+        "form":form_instance,
+        "login":"/login/",
+    }
+    return render(request, "registration/register.html", context=context)
+
+
 
