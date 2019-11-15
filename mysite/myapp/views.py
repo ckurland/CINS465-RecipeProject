@@ -33,6 +33,7 @@ def home(request):
     return render(request, "home.html", context=context)
 
 def addRecipe(request):
+    form_instance = forms.RecipeForm()
     context = {
             "title":"Add",
             "opener":"Add Recipe",
@@ -40,6 +41,7 @@ def addRecipe(request):
             "view":"/view/",
             "review":"/review/",
             "login":"/login/",
+            "form":form_instance,
             }
     return render(request, "add.html", context=context)
 
