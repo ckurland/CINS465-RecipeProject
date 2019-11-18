@@ -34,13 +34,17 @@ def home(request):
 
 @login_required(login_url='/login/')
 def addRecipe(request):
+    print(request.method)
     if request.method == "POST":
         if request.user.is_authenticated:
             form_instance = forms.RecipeForm(request.POST, request.FILES)
+            print("user is auth")
             if form_instance.is_valid():
+                print("instance not valid")
                 new_reci = form_instance.save(request=request)
                 return redirect("/")
         else:
+            print("User not Authenticated")
             return redirect("/")
     else:
         form_instance = forms.RecipeForm()
@@ -60,7 +64,8 @@ def addRecipe(request):
 
 
 @login_required(login_url='/login/')
-def viewRecipe(request):
+def viewRecipe(request,instance_id):
+    instance = models.Recipe.objects.get(id=instance_id)
     context = {
             "title":"Recipe",
             "opener":"View Recipe",
@@ -70,11 +75,12 @@ def viewRecipe(request):
             "review":"/review/",
             "login":"/login/",
             "logout":"/logout/",
+            "Recipe":instance,
             }
     return render(request, "viewRecipe.html", context=context)
 
 @login_required(login_url='/login/')
-def reviewRecipe(request):
+def reviewRecipe(request,instance_id):
     context = {
             "title":"Review",
             "opener":"Review Recipe",

@@ -5,10 +5,14 @@
 
 <h1 class="text-center">{{ opener }}</h1>
 
-<!--
-<a href= {{ reviewRecipeUrl }} >
-	<button type="submit" class="button">Review</button>
-</a>
--->
+<img class="image-resize" src="media/{{ Recipe.foodImage }}">
+<h3 class="text-center"> {{ Recipe.recipeName }} </h3>
+<p class="text-center"> {{ Recipe.foodCategories.1 }} </p>
+<p class="text-center"> {{ Recipe.recipeDescription }} </p>
+
+
+<p class="text-center"> {{ Recipe.recipeDirections }} </p>
+
+<p class="text-center"> {{ Recipe.recipeUrl }} </p>
 
 {% endblock %}
