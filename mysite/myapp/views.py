@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
@@ -28,6 +27,7 @@ def home(request):
             "view":"/view/",
             "review":"/review/",
             "login":"/login/",
+            "logout":"/logout/",
             "recipeList":value,
             }
     return render(request, "home.html", context=context)
@@ -35,12 +35,16 @@ def home(request):
 @login_required(login_url='/login/')
 def addRecipe(request):
     if request.method == "POST":
-        form_instance = forms.RecipeForm(request.POST, request.FILES)
-        if form_instance.is_valid():
-            new_reci = form_instance.save(request=request)
+        if request.user.is_authenticated:
+            form_instance = forms.RecipeForm(request.POST, request.FILES)
+            if form_instance.is_valid():
+                new_reci = form_instance.save(request=request)
+                return redirect("/")
+        else:
             return redirect("/")
     else:
         form_instance = forms.RecipeForm()
+        
 
     context = {
             "title":"Add",
@@ -49,11 +53,13 @@ def addRecipe(request):
             "view":"/view/",
             "review":"/review/",
             "login":"/login/",
+            "logout":"/logout/",
             "form":form_instance,
             }
     return render(request, "add.html", context=context)
 
 
+@login_required(login_url='/login/')
 def viewRecipe(request):
     context = {
             "title":"Recipe",
@@ -63,9 +69,11 @@ def viewRecipe(request):
             "view":"/view/",
             "review":"/review/",
             "login":"/login/",
+            "logout":"/logout/",
             }
     return render(request, "viewRecipe.html", context=context)
 
+@login_required(login_url='/login/')
 def reviewRecipe(request):
     context = {
             "title":"Review",
@@ -74,6 +82,7 @@ def reviewRecipe(request):
             "view":"/view/",
             "review":"/review/",
             "login":"/login/",
+            "logout":"/logout/",
             }
     return render(request, "review.html", context=context)
 
@@ -91,5 +100,7 @@ def register(request):
     }
     return render(request, "registration/register.html", context=context)
 
-
+def logout_view(request):
+    logout(request)
+    return redirect("/")
 
