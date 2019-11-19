@@ -28,6 +28,20 @@ class RecipeForm(forms.Form):
             new_rec.save()
         return new_rec
 
+class IngredientForm(forms.Form):
+    ingredientName = forms.CharField(label="Ingredient Name",max_length=60)
+    amount = forms.CharField(label="Amount",max_length=30)
+
+    def save(self, request, rec_id, commit=True):
+        rec = models.Recipe.objects.get(id=rec_id)
+        new_ing = models.Ingredient(
+            ingredient=self.cleaned_data["ingredientName"],
+            amount=self.cleaned_data["amount"],
+            recipe=rec
+            )
+        if commit:
+            new_ing.save()
+        return new_ing
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(
