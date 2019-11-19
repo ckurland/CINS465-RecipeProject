@@ -22,10 +22,9 @@ def home(request):
     context = {
             "title":"Recipes",
             "opener":"Recipes",
-            #"addRecipeUrl":"/add/",
             "add":"/add/",
-            "view":"/view/",
             "review":"/review/",
+            "view":"/view/",
             "login":"/login/",
             "logout":"/logout/",
             "recipeList":value,
@@ -71,10 +70,10 @@ def viewRecipe(request,instance_id):
             "opener":"View Recipe",
             "reviewRecipeUrl":"/review/",
             "add":"/add/",
-            "view":"/view/",
             "review":"/review/",
             "login":"/login/",
             "logout":"/logout/",
+            "foodCategory":instance.get_foodCategory_display(),
             "Recipe":instance,
             }
     return render(request, "viewRecipe.html", context=context)
@@ -85,8 +84,8 @@ def reviewRecipe(request,instance_id):
             "title":"Review",
             "opener":"Review Recipe",
             "add":"/add/",
-            "view":"/view/",
             "review":"/review/",
+            "view":"/view/",
             "login":"/login/",
             "logout":"/logout/",
             }
