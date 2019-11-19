@@ -28,6 +28,21 @@ class RecipeForm(forms.Form):
             new_rec.save()
         return new_rec
 
+class ReviewForm(forms.Form):
+    review = forms.CharField(label='Review', max_length=500)
+    rating = forms.ChoiceField(label="Rating",choices=models.Review.ratingOptions)
+
+    def save(self, request, reci_id, commit=True):
+        reci_instance = models.Recipe.objects.get(id=reci_id)
+        new_revi = models.Review(
+            review=self.cleaned_data["review"],
+            rating=self.cleaned_data["rating"],
+            recipe=reci_instance,
+            author=request.user
+            )
+        if commit:
+            new_revi.save()
+        return new_revi
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(

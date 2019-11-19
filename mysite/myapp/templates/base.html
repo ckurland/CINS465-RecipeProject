@@ -21,7 +21,6 @@
     {% block list %}
     {% endblock %}
     <li><a href="{{ add }}">Add</a></li>
-    <li><a href="{{ review }}">Review</a></li>
     {% if user.is_authenticated %}
     <li class="loginRight"><a href="{{ logout }}">Logout</a></li>
     {% else %}
