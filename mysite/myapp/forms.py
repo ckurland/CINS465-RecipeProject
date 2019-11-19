@@ -17,7 +17,7 @@ class RecipeForm(forms.Form):
     def save(self, request, commit=True):
         new_rec = models.Recipe(
             recipeName=self.cleaned_data["recipeName"],
-            recipeDecription=self.cleaned_data["recipeDescription"],
+            recipeDescription=self.cleaned_data["recipeDescription"],
             foodImage=self.cleaned_data["foodImage"],
             foodCategory=self.cleaned_data["foodCategory"],
             recipeUrl=self.cleaned_data["recipeUrl"],

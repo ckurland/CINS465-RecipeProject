@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 
 <h1 class="text-center">{{ opener }}</h1>
@@ -14,7 +15,7 @@
 <div class="columns large-12 medium-12 small-12">
 <div class="image-hover-wrapper">
 	<span class="image-hover-wrapper-banner">{{ o.recipeName}}</span>
-	<a href="{{ review }}" class="image-resize"><img src=media/{{ o.foodImage }}>
+	<a href="{{ view }}{{o.id}}" class="image-resize"><img class="image-resize" src=media/{{ o.foodImage }}>
     <span class="image-hover-wrapper-reveal">
     <p>{{ o.recipeDescription }}<br><i class="fa fa-link" aria-hidden="true"></i></p>
     </span>

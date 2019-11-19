@@ -115,8 +115,16 @@
 
 .image-resize {
 	width: 500px;
+	height: 350px;
 }
 
+.view-image {
+	width: 500px;
+	height: 350px;
+  	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+}
 
 
 
