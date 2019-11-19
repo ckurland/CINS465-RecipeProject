@@ -23,7 +23,6 @@ def home(request):
             "title":"Recipes",
             "opener":"Recipes",
             "add":"/add/",
-            "review":"/review/",
             "view":"/view/",
             "login":"/login/",
             "logout":"/logout/",
@@ -33,17 +32,13 @@ def home(request):
 
 @login_required(login_url='/login/')
 def addRecipe(request):
-    print(request.method)
     if request.method == "POST":
         if request.user.is_authenticated:
             form_instance = forms.RecipeForm(request.POST, request.FILES)
-            print("user is auth")
             if form_instance.is_valid():
-                print("instance not valid")
                 new_reci = form_instance.save(request=request)
                 return redirect("/ingredient/" + str(new_reci.id))
         else:
-            print("User not Authenticated")
             return redirect("/")
     else:
         form_instance = forms.RecipeForm()
@@ -75,11 +70,23 @@ def viewRecipe(request,instance_id):
             "logout":"/logout/",
             "foodCategory":instance.get_foodCategory_display(),
             "Recipe":instance,
+            "reci_id":instance_id,
             }
     return render(request, "viewRecipe.html", context=context)
 
 @login_required(login_url='/login/')
 def reviewRecipe(request,instance_id):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            form_instance = forms.ReviewForm(request.POST)
+            if form_instance.is_valid():
+                new_reci = form_instance.save(request=request, reci_id=instance_id)
+                return redirect("/view/"+str(instance_id))
+        else:
+            form_instance = forms.ReviewForm()
+    else:
+        form_instance = forms.ReviewForm()
+            
     context = {
             "title":"Review",
             "opener":"Review Recipe",
@@ -88,6 +95,8 @@ def reviewRecipe(request,instance_id):
             "view":"/view/",
             "login":"/login/",
             "logout":"/logout/",
+            "reci_id":instance_id,
+            "form":form_instance,
             }
     return render(request, "review.html", context=context)
 
