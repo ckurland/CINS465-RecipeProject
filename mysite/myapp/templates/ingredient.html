@@ -6,12 +6,13 @@
 <div class="grid-x grid-padding-x">
   <div class="large-4 medium-4 small-12 large-offset-4 medium-offset-4 cell">
     <h1 class="text-center">{{ opener }}</h1>
-    <form action="/add/" method="post" enctype="multipart/form-data">
+    <form action="/ingredient/{{ rec_id }}/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {{ form }}
-        <input type="submit" class="button expanded" value="Add Ingredients" />
+        <input type="submit" class="button expanded" value="Add" />
     </form>
+	<a href = "/" class="button expanded">Done</a>
   </div>
 </div>
 
