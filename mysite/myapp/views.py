@@ -37,7 +37,7 @@ def addRecipe(request):
             form_instance = forms.RecipeForm(request.POST, request.FILES)
             if form_instance.is_valid():
                 new_reci = form_instance.save(request=request)
-                return redirect("/")
+                return redirect("/ingredient/" + str(new_reci.id))
         else:
             return redirect("/")
     else:
@@ -99,6 +99,27 @@ def reviewRecipe(request,instance_id):
             "form":form_instance,
             }
     return render(request, "review.html", context=context)
+
+def addIng(request, instance_id):
+    if request.method == "POST":
+        form_instance = forms.IngredientForm(request.POST)
+        if(form_instance.is_valid()):
+                form_instance.save(request=request, rec_id = instance_id)
+                return redirect("/ingredient/" + str(instance_id)+"/")
+    else:
+        form_instance = forms.IngredientForm()
+    context = {
+            "rec_id":instance_id,
+            "form":form_instance,
+            "title":"Ingredients",
+            "opener":"Add Ingredients",
+            "add":"/add/",
+            "login":"/login/",
+            "logout":"/logout/",
+        }
+
+    return render(request, "ingredient.html", context=context)
+
 
 def register(request):
     if request.method == "POST":
