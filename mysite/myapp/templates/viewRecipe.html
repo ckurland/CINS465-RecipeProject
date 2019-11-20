@@ -16,6 +16,32 @@
 
 <p class="text-center"> {{ Recipe.recipeUrl }} </p>
 
+<div class="text-center">
 <a href="/review/{{reci_id}}/" class="button">Review</a>
+</div>
+
+<h3>Reviews</h3>
+	{% for o in rev_list %}
+
+<div class="testimonial-block-vertical">
+  <div class="testimonial-block-vertical-quote">
+	  <h5>Rating: {{o.rating}}</h5>
+	<p>{{o.review}}</p>
+  </div>
+  <div class="testimonial-block-vertical-person">
+    <div>
+	    <p class="testimonial-block-vertical-name">{{o.author}}</p>
+    </div>
+  </div>
+</div>
+<p></p>
+
+<!--
+	<h5>Rating: {{o.rating}}</h5>
+	<h5>Author: {{o.author}}</h5>
+	<p>{{o.review}}</p>
+-->
+
+	{% endfor %}
 
 {% endblock %}
