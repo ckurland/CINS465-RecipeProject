@@ -60,6 +60,17 @@ def addRecipe(request):
 @login_required(login_url='/login/')
 def viewRecipe(request,instance_id):
     instance = models.Recipe.objects.get(id=instance_id)
+    review_query = models.Review.objects.filter(recipe=instance_id)
+    review_list = []
+    for r_q in review_query:
+        review_list += [{
+        "review":r_q.review,
+        "rating":r_q.rating,
+        "author":r_q.author.username,
+        "created_on":r_q.created_on,
+        "id":r_q.id
+        }]
+
     context = {
             "title":"Recipe",
             "opener":"View Recipe",
@@ -71,6 +82,7 @@ def viewRecipe(request,instance_id):
             "foodCategory":instance.get_foodCategory_display(),
             "Recipe":instance,
             "reci_id":instance_id,
+            "rev_list":review_list,
             }
     return render(request, "viewRecipe.html", context=context)
 

@@ -22,6 +22,7 @@
     {% endblock %}
     <li><a href="{{ add }}">Add</a></li>
     {% if user.is_authenticated %}
+    <li><a >Hi, {{user.username}}</a></li>
     <li class="loginRight"><a href="{{ logout }}">Logout</a></li>
     {% else %}
     <li class="loginRight"><a href="{{ login }}">Login</a></li>
