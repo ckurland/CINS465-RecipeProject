@@ -14,7 +14,7 @@
 
 <p class="text-center"> {{ Recipe.recipeDirections }} </p>
 
-<p class="text-center"> {{ Recipe.recipeUrl }} </p>
+<a href={{Recipe.recipeUrl}} target="_blank" class="text-center">{{Recipe.recipeUrl}}</a>
 
 <div class="text-center">
 <a href="/review/{{reci_id}}/" class="button">Review</a>
