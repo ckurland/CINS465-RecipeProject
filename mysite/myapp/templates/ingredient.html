@@ -6,6 +6,14 @@
 <div class="grid-x grid-padding-x">
   <div class="large-4 medium-4 small-12 large-offset-4 medium-offset-4 cell">
     <h1 class="text-center">{{ opener }}</h1>
+        <ul>
+	{% for o in ing_list %}
+
+	<li>{{o.ingredient}} {{o.amount}}</li>
+
+	{% endfor %}
+        <ul>
+
     <form action="/ingredient/{{ rec_id }}/" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 

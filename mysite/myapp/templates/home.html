@@ -12,7 +12,7 @@
 
 	{% for o in recipeList %}
 <div class="row">
-	<div class="columns large-4 medium-4 small-4">
+	<div class="large-4 medium-4 small-12 columns">
 		<div class="image-hover-wrapper">
 			<span class="image-hover-wrapper-banner">{{ o.recipeName}}</span>
 			<a href="{{ view }}{{o.id}}" class="image-resize"><img class="image-resize" src=media/{{ o.foodImage }}>
@@ -23,7 +23,6 @@
 		</div>
 	</div>
 </div>
-
 	{% endfor %}
 
 
