@@ -70,6 +70,14 @@ def viewRecipe(request,instance_id):
         "created_on":r_q.created_on,
         "id":r_q.id
         }]
+    ing_query = models.Ingredient.objects.filter(recipe=instance_id)
+    ing_list = []
+    for i_q in ing_query:
+        ing_list += [{
+        "ingredient":i_q.ingredient,
+        "amount":i_q.amount,
+        "id":i_q.id
+        }]
 
     context = {
             "title":"Recipe",
@@ -83,6 +91,7 @@ def viewRecipe(request,instance_id):
             "Recipe":instance,
             "reci_id":instance_id,
             "rev_list":review_list,
+            "ing_list":ing_list,
             }
     return render(request, "viewRecipe.html", context=context)
 
@@ -112,6 +121,7 @@ def reviewRecipe(request,instance_id):
             }
     return render(request, "review.html", context=context)
 
+@login_required(login_url='/login/')
 def addIng(request, instance_id):
     if request.method == "POST":
         form_instance = forms.IngredientForm(request.POST)
@@ -120,6 +130,14 @@ def addIng(request, instance_id):
                 return redirect("/ingredient/" + str(instance_id)+"/")
     else:
         form_instance = forms.IngredientForm()
+    ing_query = models.Ingredient.objects.filter(recipe=instance_id)
+    ing_list = []
+    for i_q in ing_query:
+        ing_list += [{
+        "ingredient":i_q.ingredient,
+        "amount":i_q.amount,
+        "id":i_q.id
+        }]
     context = {
             "rec_id":instance_id,
             "form":form_instance,
@@ -128,6 +146,7 @@ def addIng(request, instance_id):
             "add":"/add/",
             "login":"/login/",
             "logout":"/logout/",
+            "ing_list":ing_list,
         }
 
     return render(request, "ingredient.html", context=context)

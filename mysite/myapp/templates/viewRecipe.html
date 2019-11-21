@@ -13,11 +13,19 @@
 
 
 <p class="text-center"> {{ Recipe.recipeDirections }} </p>
+<p >Ingredients: </p>
+        <ul>
+	{% for o in ing_list %}
+
+	<li>{{o.ingredient}} {{o.amount}}</li>
+
+	{% endfor %}
+        <ul>
 
 <a href={{Recipe.recipeUrl}} target="_blank" class="text-center">{{Recipe.recipeUrl}}</a>
 
 <div class="text-center">
-<a href="/review/{{reci_id}}/" class="button">Review</a>
+<a href="/review/{{reci_id}}/" class="button">Add Review</a>
 </div>
 
 <h3>Reviews</h3>
