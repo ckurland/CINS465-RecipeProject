@@ -104,30 +104,8 @@
   padding: 0.5rem;
   position: absolute;
   top: 25%;
-  width: 30%;
+  width: 45%;
   z-index: 10;
-}
-
-.loginRight {
-	position: absolute;
-	right:0;
-}
-
-.image-resize {
-	width: 500px;
-	height: 350px;
-}
-
-.view-image {
-	width: 500px;
-	height: 350px;
-  	display: block;
- 	margin-left: auto;
-  	margin-right: auto;
-}
-
-.button {
-  background-color: #143f9c;
 }
 
 
@@ -187,4 +165,42 @@
   margin-left: 0.65rem;
 }
 
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.loginRight {
+	position: absolute;
+	right:0;
+}
+.userRight {
+	position: absolute;
+	right:80px;
+}
+
+.image-resize {
+	width: 90%;
+	height: 200px
+}
+
+.view-image {
+	width: 500px;
+	height: 350px;
+  	display: block;
+ 	margin-left: auto;
+  	margin-right: auto;
+}
+
+.button {
+  background-color: #143f9c;
+}
 
