@@ -12,7 +12,9 @@
 
 	{% for o in recipeList %}
 <div class="row">
-	<div class="large-4 medium-4 small-12 columns">
+	{% if forloop.counter|divisibleby:2 %}
+	<div class="column">
+		<!--	<div class="large-4 medium-4 small-12 columns">-->
 		<div class="image-hover-wrapper">
 			<span class="image-hover-wrapper-banner">{{ o.recipeName}}</span>
 			<a href="{{ view }}{{o.id}}" class="image-resize"><img class="image-resize" src=media/{{ o.foodImage }}>
@@ -22,6 +24,20 @@
   			</a>
 		</div>
 	</div>
+	{% else %}
+	<div class="column">
+		<!--	<div class="large-4 medium-4 small-12 columns">-->
+		<div class="image-hover-wrapper">
+			<span class="image-hover-wrapper-banner">{{ o.recipeName}}</span>
+			<a href="{{ view }}{{o.id}}" class="image-resize"><img class="image-resize" src=media/{{ o.foodImage }}>
+    			<span class="image-hover-wrapper-reveal">
+    			<p>{{ o.recipeDescription }}<br><i class="fa fa-link" aria-hidden="true"></i></p>
+   			 </span>
+  			</a>
+		</div>
+	</div>
+	{% endif %}
+	<!--	</div> -->
 </div>
 	{% endfor %}
 
