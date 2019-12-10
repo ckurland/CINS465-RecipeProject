@@ -10,11 +10,16 @@
 	Found here: https://foundation.zurb.com/building-blocks/blocks/image-hover-wrapper.html
 -->
 
-	{% for o in recipeList %}
-<div class="row">
-	{% if forloop.counter|divisibleby:2 %}
-	<div class="column">
-		<!--	<div class="large-4 medium-4 small-12 columns">-->
+
+<div class="grid-container">
+<div class="grid-x grid-padding-x">
+
+<div class="large-8 medium-8 small-6 cell" style="background-color:green;">
+
+	<div class="grid-container">
+	<div class="grid-x grid-padding-x">
+		{% for o in recipeList %}
+		<div class="large-6 medium-6 cell">
 		<div class="image-hover-wrapper">
 			<span class="image-hover-wrapper-banner">{{ o.recipeName}}</span>
 			<a href="{{ view }}{{o.id}}" class="image-resize"><img class="image-resize" src=media/{{ o.foodImage }}>
@@ -23,23 +28,68 @@
    			 </span>
   			</a>
 		</div>
-	</div>
-	{% else %}
-	<div class="column">
-		<!--	<div class="large-4 medium-4 small-12 columns">-->
-		<div class="image-hover-wrapper">
-			<span class="image-hover-wrapper-banner">{{ o.recipeName}}</span>
-			<a href="{{ view }}{{o.id}}" class="image-resize"><img class="image-resize" src=media/{{ o.foodImage }}>
-    			<span class="image-hover-wrapper-reveal">
-    			<p>{{ o.recipeDescription }}<br><i class="fa fa-link" aria-hidden="true"></i></p>
-   			 </span>
-  			</a>
 		</div>
+		{% endfor %}
 	</div>
-	{% endif %}
-	<!--	</div> -->
+	</div>
+	
+</div> 
+
+
+<div class="large-4 medium-4 small-6 cell" style="background-color:orange;">
+    {% if user.is_authenticated %}
+    	<textarea  class="pos_fix" id="chat-log" cols="100" rows="20"></textarea><br/>
+    	<input  class ="pos_fix_2"id="chat-message-input" type="text" size="100"/><br/>
+    	<input  class="pos_fix_2"id="chat-message-submit" type="button" value="Send"/>
+    {% else %}
+	<h2 class="text-center pos_fix"> Sign in to enable chat functionality</h2>
+    {% endif %}
+
 </div>
-	{% endfor %}
+
+</div>
+</div>
+
+
+
+{% endblock %}
+{% block scripts %}
+<script>
+    var roomName = "Lobby";
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        document.querySelector('#chat-log').value += (message + '\n');
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        var messageInputDom = document.querySelector('#chat-message-input');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+
+
 
 
 

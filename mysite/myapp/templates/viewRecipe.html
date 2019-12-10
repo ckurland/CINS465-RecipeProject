@@ -13,6 +13,7 @@
 
 
 <p class="text-center"> {{ Recipe.recipeDirections }} </p>
+{% if ing_list %}
 <p >Ingredients: </p>
         <ul>
 	{% for o in ing_list %}
@@ -21,6 +22,7 @@
 
 	{% endfor %}
         <ul>
+{% endif %}
 
 <a href={{Recipe.recipeUrl}} target="_blank" class="text-center">{{Recipe.recipeUrl}}</a>
 
@@ -29,6 +31,7 @@
 </div>
 
 <h3>Reviews</h3>
+{% if rev_list %}
 	{% for o in rev_list %}
 
 <div class="testimonial-block-vertical">
@@ -43,13 +46,14 @@
   </div>
 </div>
 <p></p>
-
-<!--
-	<h5>Rating: {{o.rating}}</h5>
-	<h5>Author: {{o.author}}</h5>
-	<p>{{o.review}}</p>
--->
-
 	{% endfor %}
+{% else %}
+<div class="testimonial-block-vertical">
+  <div class="testimonial-block-vertical-quote">
+	<p>Be the first to submit a review!!</p>
+  </div>
+</div>
+<p></p>
+{% endif %}
 
 {% endblock %}

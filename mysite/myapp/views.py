@@ -4,17 +4,22 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
+# chat
+from django.utils.safestring import mark_safe
+import json
+
 from . import models
 from . import forms
 
+def chat(request):
+    return render(request, "chat.html", {}) 
 
-def index(request):
-    context = {
-            "title":"Greetings",
-            "opener":"Hello World",
-            "initialStatement":" This is the beginnings of the greatest recipe website known to man",
-            }
-    return render(request, "index.html", context=context)
+def room(request, room_name):
+    return render(request, 'room.html', {
+        'room_name_json': mark_safe(json.dumps(room_name))
+    })
+
+
 
 
 def home(request):
@@ -26,6 +31,7 @@ def home(request):
             "view":"/view/",
             "login":"/login/",
             "logout":"/logout/",
+            "chat":"/chat/",
             "recipeList":value,
             }
     return render(request, "home.html", context=context)
