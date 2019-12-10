@@ -7,6 +7,8 @@ urlpatterns = [
     path('view/<int:instance_id>/', views.viewRecipe),
     path('review/<int:instance_id>/', views.reviewRecipe),
     path('', views.home),
+    path('chat/', views.chat, name="chat"),
+    path('chat/<str:room_name>/', views.room, name='room'),
     path('login/', auth_views.LoginView.as_view()),
     path('logout/', views.logout_view),
     path('register/', views.register),

@@ -197,3 +197,13 @@
 	position:relative;
 }
 
+.pos_fix {
+	position:fixed;
+}
+.pos_fix_2 {
+	position:fixed;
+	top:605px;
+}
+
+
+
