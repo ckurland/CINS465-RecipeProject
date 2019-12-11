@@ -193,17 +193,31 @@
 .button {
   background-color: #143f9c;
 }
+
 .container {
 	position:relative;
 }
 
 .pos_fix {
 	position:fixed;
+	top:175px;
+	width: 300px;
 }
 .pos_fix_2 {
 	position:fixed;
-	top:605px;
+	top:685px;
+	width:300px;
+}
+.pos_fix_3 {
+	position:fixed;
+	top:725px;
+}
+.pos_fix_4 {
+	position:fixed;
 }
 
+body {
+	background-color:#d3d4de;
+}
 
 

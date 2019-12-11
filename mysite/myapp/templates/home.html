@@ -14,7 +14,7 @@
 <div class="grid-container">
 <div class="grid-x grid-padding-x">
 
-<div class="large-8 medium-8 small-6 cell" style="background-color:green;">
+<div class="large-8 medium-8 small-6 cell">
 
 	<div class="grid-container">
 	<div class="grid-x grid-padding-x">
@@ -36,11 +36,12 @@
 </div> 
 
 
-<div class="large-4 medium-4 small-6 cell" style="background-color:orange;">
+<div class="large-4 medium-4 small-6 cell">
     {% if user.is_authenticated %}
-    	<textarea  class="pos_fix" id="chat-log" cols="100" rows="20"></textarea><br/>
+    	<h3 class="pos_fix_4">Chat</h3>
+    	<textarea readonly class="pos_fix" id="chat-log" cols="10" rows="20"></textarea><br/>
     	<input  class ="pos_fix_2"id="chat-message-input" type="text" size="100"/><br/>
-    	<input  class="pos_fix_2"id="chat-message-submit" type="button" value="Send"/>
+    	<input  class="pos_fix_3"id="chat-message-submit" type="button" value="Send"/>
     {% else %}
 	<h2 class="text-center pos_fix"> Sign in to enable chat functionality</h2>
     {% endif %}
