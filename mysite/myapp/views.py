@@ -11,17 +11,6 @@ import json
 from . import models
 from . import forms
 
-def chat(request):
-    return render(request, "chat.html", {}) 
-
-def room(request, room_name):
-    return render(request, 'room.html', {
-        'room_name_json': mark_safe(json.dumps(room_name))
-    })
-
-
-
-
 def home(request):
     value = models.Recipe.objects.all()
     context = {
@@ -31,7 +20,6 @@ def home(request):
             "view":"/view/",
             "login":"/login/",
             "logout":"/logout/",
-            "chat":"/chat/",
             "recipeList":value,
             }
     return render(request, "home.html", context=context)
