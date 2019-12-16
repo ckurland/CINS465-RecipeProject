@@ -3,12 +3,12 @@
 {% block content %}
 
 
-<h1 class="text-center">{{ opener }}</h1>
+<!--<h1 class="text-center">{{ opener }}</h1> -->
+<h1 class="text-center"> {{ Recipe.recipeName }} </h1>
 
 
-<img class="view-image" src={{BASE_DIR}}/media/{{ Recipe.foodImage }}>
+<img class="view-image" src={{BASE_DIR}}/media/{{ Recipe.foodImage }}><br>
 
-<h3 class="text-center"> {{ Recipe.recipeName }} </h3>
 <p class="text-center"> {{ foodCategory }} </p>
 <p class="text-center"> {{ Recipe.recipeDescription }} </p>
 
