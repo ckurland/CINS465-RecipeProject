@@ -3,22 +3,23 @@
 {% block content %}
 
 
-<h1 class="text-center">{{ opener }}</h1>
+<!--<h1 class="text-center">{{ opener }}</h1> -->
+<h1 class="text-center"> {{ Recipe.recipeName }} </h1>
 
-<img class="view-image" src={{BASE_DIR}}/media/{{ Recipe.foodImage }}>
 
-<h3 class="text-center"> {{ Recipe.recipeName }} </h3>
+<img class="view-image" src={{BASE_DIR}}/media/{{ Recipe.foodImage }}><br>
+
 <p class="text-center"> {{ foodCategory }} </p>
 <p class="text-center"> {{ Recipe.recipeDescription }} </p>
 
 
 <p class="text-center"> {{ Recipe.recipeDirections }} </p>
 {% if ing_list %}
-<p >Ingredients: </p>
+<p class="text-center">Ingredients: </p>
         <ul>
 	{% for o in ing_list %}
 
-	<li>{{o.ingredient}} {{o.amount}}</li>
+	<li class="text-center">{{o.ingredient}} {{o.amount}}</li>
 
 	{% endfor %}
         <ul>
