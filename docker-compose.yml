@@ -15,13 +15,13 @@ services:
     links:
        - redis
     ports:
-       - 8000:8000
+       - 80:8000
     environment:
        - REDIS_URL=redis://cache
        - NODE_ENV=development
        - RHOST=redis
        - PORT=8000
-    user: "1000:1000" 
+         #    user: "1000:1000" 
     command: python /code/mysite/manage.py runserver 0.0.0.0:8000
     depends_on:
       - redis
