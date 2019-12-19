@@ -21,7 +21,7 @@ services:
        - NODE_ENV=development
        - RHOST=redis
        - PORT=8000
-    user: "1000:1000" 
+         #    user: "1000:1000" 
     command: python /code/mysite/manage.py runserver 0.0.0.0:8000
     depends_on:
       - redis
