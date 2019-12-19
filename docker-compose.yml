@@ -14,8 +14,8 @@ services:
        - .:/code
     links:
        - redis
-    ports:
-       - 80:8000
+    expose:
+       - 8000
     environment:
        - REDIS_URL=redis://cache
        - NODE_ENV=development
@@ -25,4 +25,17 @@ services:
     command: python /code/mysite/manage.py runserver 0.0.0.0:8000
     depends_on:
       - redis
+
+  nginx:
+    restart: always
+    build: ./nginx/
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+    #  - "443:443"
+#     volumes:
+#        - ./mysite/myapp/static:/static
+    links:
+      - web:web
     
